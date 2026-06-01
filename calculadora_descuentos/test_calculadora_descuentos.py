@@ -172,7 +172,7 @@ class TestCalculadoraDescuentos(unittest.TestCase):
       # Assert
       self.assertEqual(resultado_obtenido, resultado_esperado)
       
-      def test_descuento_acumulado_para_doscientos_dolares(self):
+    def test_descuento_acumulado_para_doscientos_dolares(self):
            """
            PRUEBA ADICIONAL DEL ESTUDIANTE 3 - ETAPA ACT
            
@@ -183,7 +183,7 @@ class TestCalculadoraDescuentos(unittest.TestCase):
            Caso esperado:
            $200 - 20% = $160
            $160 - $10 = $150
-           
+            
            """
            
            calculadora = CalculadoraDescuentos()
@@ -200,10 +200,16 @@ class TestCalculadoraDescuentos(unittest.TestCase):
                    descuento
                    )
                )
-           self.assertEqual(
-               resultado_obtenido,
-               resultado_esperado
-               )
+        
+           print("\n--- PRUEBA 2 DEL ESTUDIANTE 3 ---")
+           print(f"Monto original: ${monto}")
+           print(f"Descuento porcentaje: {porcentaje}%")
+           print(f"Descuento fijo: ${descuento}")
+           print(f"Resultado esperado: ${resultado_esperado}")
+           print(f"Resultado obtenido: ${resultado_obtenido}")
+           
+           # Assert
+           self.assertEqual(resultado_obtenido, resultado_esperado)
 
 # Permite ejecutar la prueba desde la terminal.
 if __name__ == "__main__":
