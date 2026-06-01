@@ -52,4 +52,8 @@ class CalculadoraDescuentos:
         porcentaje,
         descuento
         ):
-        return 0
+        descuento_porcentaje = monto * porcentaje / 100
+        subtotal = monto - descuento_porcentaje
+        precio_final = subtotal - descuento
+        
+        return precio_final
