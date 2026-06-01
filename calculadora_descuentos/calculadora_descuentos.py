@@ -44,3 +44,12 @@ class CalculadoraDescuentos:
     def aplicar_descuento_fijo(self, monto, descuento):
         precio_final = monto - descuento
         return precio_final
+    
+    # Ciclo 3 
+    def aplicar_descuento_acumulado(
+        self,
+        monto,
+        porcentaje,
+        descuento
+        ):
+        return 0
