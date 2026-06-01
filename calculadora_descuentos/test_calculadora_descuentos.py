@@ -1,13 +1,15 @@
 # ============================================================
-# PRUEBA UNITARIA - ESTUDIANTE 1
-# ETAPA PLAN DEL CICLO PDCA
+# PRUEBAS UNITARIAS - ESTUDIANTES 1 Y 2
+# ETAPA PLAN DEL CICLO PDCA — CICLO 1 Y CICLO 2
 # ============================================================
-# En esta etapa definimos el comportamiento esperado antes
-# de implementar la lógica de la calculadora.
+# CICLO 1 (Estudiante 1):
+#   Comprobar que un monto de $100 quede en $90 después de
+#   aplicar automáticamente un descuento porcentual del 10%.
 #
-# Objetivo:
-# Comprobar que un monto de $100 quede en $90 después de
-# aplicar automáticamente un descuento fijo del 10%.
+# CICLO 2 (Estudiante 2):
+#   Comprobar que al aplicar un descuento fijo en dólares
+#   el precio final sea el resultado de restar dicho monto.
+#   Ejemplo: $100 con descuento de $5 debe quedar en $95.
 # ============================================================
 
 import unittest
@@ -74,6 +76,61 @@ class TestCalculadoraDescuentos(unittest.TestCase):
         print(f"Resultado obtenido: ${resultado_obtenido}")
 
         # Assert: comprobar que el resultado sea correcto.
+        self.assertEqual(resultado_obtenido, resultado_esperado)
+        
+        #CICLO 2
+    def test_descuento_fijo_de_cinco_dolares(self):
+        """
+            Verificar que al aplicar un descuento fijo de $5
+            a un precio de $100, el resultado sea $95.
+        """
+
+        # Arrange
+        calculadora = CalculadoraDescuentos()
+        monto = 100
+        descuento = 5
+        resultado_esperado = 95
+
+        # Act
+        resultado_obtenido = calculadora.aplicar_descuento_fijo(
+            monto, descuento
+        )
+
+        # Mostrar valores
+        print("\n--- PRUEBA DEL ESTUDIANTE 2 ---")
+        print(f"Monto original:     ${monto}")
+        print(f"Descuento fijo:     ${descuento}")
+        print(f"Resultado esperado: ${resultado_esperado}")
+        print(f"Resultado obtenido: ${resultado_obtenido}")
+
+        # Assert
+        self.assertEqual(resultado_obtenido, resultado_esperado)
+
+    def test_descuento_fijo_para_doscientos_dolares(self):
+        """
+            Si el precio original es $200 y se aplica un descuento
+            fijo de $30, el precio final debe ser $170.
+        """
+
+        # Arrange
+        calculadora = CalculadoraDescuentos()
+        monto = 200
+        descuento = 30
+        resultado_esperado = 170
+
+        # Act
+        resultado_obtenido = calculadora.aplicar_descuento_fijo(
+            monto, descuento
+        )
+
+        # Mostrar valores
+        print("\n--- PRUEBA ADICIONAL DEL ESTUDIANTE 2 ---")
+        print(f"Monto original:     ${monto}")
+        print(f"Descuento fijo:     ${descuento}")
+        print(f"Resultado esperado: ${resultado_esperado}")
+        print(f"Resultado obtenido: ${resultado_obtenido}")
+
+        # Assert
         self.assertEqual(resultado_obtenido, resultado_esperado)
 
 # Permite ejecutar la prueba desde la terminal.
