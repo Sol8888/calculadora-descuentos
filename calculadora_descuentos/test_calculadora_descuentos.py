@@ -44,6 +44,37 @@ class TestCalculadoraDescuentos(unittest.TestCase):
         # Assert: comprobar si el resultado es el esperado.
         self.assertEqual(resultado_obtenido, resultado_esperado)
 
+    def test_descuento_porcentual_para_cuatrocientos_dolares(self):
+        """
+        PRUEBA ADICIONAL - ETAPA ACT
+
+        Objetivo:
+            Verificar que el método también funcione con otro monto.
+
+        Caso esperado:
+            Si el precio original es $400 y se aplica un descuento
+            automático del 10%, el precio final debe ser $360.
+        """
+
+        # Arrange: preparar los datos de entrada.
+        calculadora = CalculadoraDescuentos()
+        monto = 400
+        resultado_esperado = 360
+
+        # Act: ejecutar el método que aplica el descuento.
+        resultado_obtenido = (
+            calculadora.aplicar_descuento_porcentaje(monto)
+        )
+
+        # Mostrar los valores utilizados durante la prueba.
+        print("\n--- PRUEBA ADICIONAL DEL ESTUDIANTE 1 ---")
+        print(f"Monto original: ${monto}")
+        print("Descuento aplicado: 10%")
+        print(f"Resultado esperado: ${resultado_esperado}")
+        print(f"Resultado obtenido: ${resultado_obtenido}")
+
+        # Assert: comprobar que el resultado sea correcto.
+        self.assertEqual(resultado_obtenido, resultado_esperado)
 
 # Permite ejecutar la prueba desde la terminal.
 if __name__ == "__main__":
