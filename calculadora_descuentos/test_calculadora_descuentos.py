@@ -171,6 +171,39 @@ class TestCalculadoraDescuentos(unittest.TestCase):
 
       # Assert
       self.assertEqual(resultado_obtenido, resultado_esperado)
+      
+      def test_descuento_acumulado_para_doscientos_dolares(self):
+           """
+           PRUEBA ADICIONAL DEL ESTUDIANTE 3 - ETAPA ACT
+           
+           Después de comprobar que el descuento acumulado funciona
+           para un monto de $100, verificamos el mismo comportamiento
+           utilizando otros valores.
+           
+           Caso esperado:
+           $200 - 20% = $160
+           $160 - $10 = $150
+           
+           """
+           
+           calculadora = CalculadoraDescuentos()
+           monto = 200
+           porcentaje = 20
+           descuento = 10
+           
+           resultado_esperado = 150
+           
+           resultado_obtenido = (
+               calculadora.aplicar_descuento_acumulado(
+                   monto,
+                   porcentaje,
+                   descuento
+                   )
+               )
+           self.assertEqual(
+               resultado_obtenido,
+               resultado_esperado
+               )
 
 # Permite ejecutar la prueba desde la terminal.
 if __name__ == "__main__":
