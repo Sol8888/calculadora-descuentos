@@ -1,12 +1,12 @@
 # ============================================================
 # CLASE PRINCIPAL: CalculadoraDescuentos
-# ETAPA DO DEL CICLO PDCA
+# ETAPA CHECK DEL CICLO PDCA
 # ============================================================
-# En esta etapa agregamos una implementación mínima e incorrecta
-# de manera intencional.
+# En esta etapa corregimos la implementación para que la prueba
+# unitaria pase correctamente.
 #
-# El propósito es verificar que la prueba unitaria sea capaz de
-# detectar que el resultado no cumple con lo esperado.
+# La funcionalidad debe aplicar automáticamente un descuento
+# fijo del 10% al monto ingresado.
 # ============================================================
 
 
@@ -14,15 +14,29 @@ class CalculadoraDescuentos:
 
     def aplicar_descuento_porcentaje(self, monto):
         """
-        Método temporal para comprobar que la prueba falle.
+        Aplica automáticamente un descuento fijo del 10%.
 
         Parámetro:
             monto: precio original del producto.
 
         Retorna:
-            0 de forma temporal e intencionalmente incorrecta.
+            precio final después de aplicar el descuento.
+
+        Ejemplo:
+            monto = 100
+            descuento = 10
+            precio final = 90
         """
 
-        # Este valor es incorrecto de forma intencional.
-        # Más adelante reemplazaremos esta línea por el cálculo real.
-        return 0
+        # El porcentaje se mantiene fijo porque corresponde
+        # a la primera funcionalidad del ejercicio.
+        porcentaje = 10
+
+        # Calcular cuánto dinero representa el 10% del monto.
+        descuento = monto * porcentaje / 100
+
+        # Restar el descuento al precio original.
+        precio_final = monto - descuento
+
+        # Retornar el precio final calculado.
+        return precio_final
