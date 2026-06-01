@@ -133,6 +133,45 @@ class TestCalculadoraDescuentos(unittest.TestCase):
         # Assert
         self.assertEqual(resultado_obtenido, resultado_esperado)
 
+        # CICLO 3 - ESTUDIANTE 3
+    def test_descuento_acumulado(self):
+      """
+      Verifica que primero se aplique un descuento porcentual
+      y luego un descuento fijo.
+
+      Ejemplo:
+        Monto original = 100
+        Descuento porcentaje = 10%
+        Precio después del porcentaje = 90
+        Descuento fijo = 5
+        Resultado final = 85
+    """
+
+     # Arrange
+      calculadora = CalculadoraDescuentos()
+      monto = 100
+      porcentaje = 10
+      descuento = 5
+      resultado_esperado = 85
+
+    # Act
+      resultado_obtenido = calculadora.aplicar_descuento_acumulado(
+         monto,
+         porcentaje,
+         descuento
+    )
+
+      # Mostrar valores
+      print("\n--- PRUEBA DEL ESTUDIANTE 3 ---")
+      print(f"Monto original: ${monto}")
+      print(f"Descuento porcentaje: {porcentaje}%")
+      print(f"Descuento fijo: ${descuento}")
+      print(f"Resultado esperado: ${resultado_esperado}")
+      print(f"Resultado obtenido: ${resultado_obtenido}")
+
+      # Assert
+      self.assertEqual(resultado_obtenido, resultado_esperado)
+
 # Permite ejecutar la prueba desde la terminal.
 if __name__ == "__main__":
     unittest.main(verbosity=2)
