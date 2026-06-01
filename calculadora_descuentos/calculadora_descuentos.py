@@ -42,8 +42,5 @@ class CalculadoraDescuentos:
         return precio_final
     # Ciclo 2
     def aplicar_descuento_fijo(self, monto, descuento):
-        """
-        ETAPA DO: implementación incorrecta intencional.
-        Retorna el monto sin restar nada, para que la prueba falle.
-        """
-        return monto 
+        precio_final = monto - descuento
+        return precio_final
