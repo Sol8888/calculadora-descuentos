@@ -1,59 +1,42 @@
 # ============================================================
 # CLASE PRINCIPAL: CalculadoraDescuentos
-# ETAPA CHECK DEL CICLO PDCA
+# ETAPA ACT DEL CICLO PDCA - REFACTORIZACIÓN
 # ============================================================
-# En esta etapa corregimos la implementación para que la prueba
-# unitaria pase correctamente.
-#
-# La funcionalidad debe aplicar automáticamente un descuento
-# fijo del 10% al monto ingresado.
-# ============================================================
-
 
 class CalculadoraDescuentos:
 
-    def aplicar_descuento_porcentaje(self, monto):
-        """
-        Aplica automáticamente un descuento fijo del 10%.
+    def _validar_positivo(self, valor, nombre_variable):
+        """Método privado para validar que las entradas sean numéricas y positivas."""
+        if not isinstance(valor, (int, float)):
+            raise TypeError(f"{nombre_variable} debe ser un valor numérico.")
+        if valor < 0:
+            raise ValueError(f"{nombre_variable} no puede ser negativo.")
 
-        Parámetro:
-            monto: precio original del producto.
+    # Ciclo 1 - Refactorizado
+    def aplicar_descuento_porcentaje(self, monto, porcentaje=10):
+        self._validar_positivo(monto, "El monto")
+        self._validar_positivo(porcentaje, "El porcentaje")
+        
+        if porcentaje > 100:
+            raise ValueError("El porcentaje de descuento no puede ser mayor a 100.")
+            
+        descuento = monto * (porcentaje / 100)
+        return monto - descuento
 
-        Retorna:
-            precio final después de aplicar el descuento.
-
-        Ejemplo:
-            monto = 100
-            descuento = 10
-            precio final = 90
-        """
-
-        # El porcentaje se mantiene fijo porque corresponde
-        # a la primera funcionalidad del ejercicio.
-        porcentaje = 10
-
-        # Calcular cuánto dinero representa el 10% del monto.
-        descuento = monto * porcentaje / 100
-
-        # Restar el descuento al precio original.
-        precio_final = monto - descuento
-
-        # Retornar el precio final calculado.
-        return precio_final
-    # Ciclo 2
+    # Ciclo 2 - Refactorizado
     def aplicar_descuento_fijo(self, monto, descuento):
-        precio_final = monto - descuento
-        return precio_final
+        self._validar_positivo(monto, "El monto")
+        self._validar_positivo(descuento, "El descuento fijo")
+        
+        if descuento > monto:
+            raise ValueError("El descuento fijo no puede ser mayor al precio original.")
+            
+        return monto - descuento
     
-    # Ciclo 3 
-    def aplicar_descuento_acumulado(
-        self,
-        monto,
-        porcentaje,
-        descuento
-        ):
-        descuento_porcentaje = monto * porcentaje / 100
-        subtotal = monto - descuento_porcentaje
-        precio_final = subtotal - descuento
+    # Ciclo 3 - Refactorizado (Aplicando DRY - Don't Repeat Yourself)
+    def aplicar_descuento_acumulado(self, monto, porcentaje, descuento):
+        # Reutilizamos los métodos anteriores en lugar de reescribir la lógica matemática
+        subtotal = self.aplicar_descuento_porcentaje(monto, porcentaje)
+        precio_final = self.aplicar_descuento_fijo(subtotal, descuento)
         
         return precio_final

@@ -210,6 +210,60 @@ class TestCalculadoraDescuentos(unittest.TestCase):
            
            # Assert
            self.assertEqual(resultado_obtenido, resultado_esperado)
+    
+    # ============================================================
+    # CICLO 4 - ESTUDIANTE 4 (ETAPA ACT - EXCEPCIONES Y LIMITES)
+    # ============================================================
+    def test_monto_negativo_lanza_excepcion(self):
+        """
+        Verifica que el sistema rechace montos negativos
+        levantando un ValueError.
+        """
+        calculadora = CalculadoraDescuentos()
+        monto_invalido = -50
+        
+        print("\n--- PRUEBA DEL ESTUDIANTE 4 (Monto Negativo) ---")
+        print(f"Intentando aplicar descuento a: ${monto_invalido}")
+        
+        # Assert: Comprobamos que el error esperado se dispare
+        with self.assertRaises(ValueError) as context:
+            calculadora.aplicar_descuento_porcentaje(monto_invalido)
+            
+        print(f"Excepción capturada correctamente: {context.exception}")
+
+    def test_descuento_fijo_mayor_al_monto_lanza_excepcion(self):
+        """
+        Verifica que no se pueda dar un descuento fijo
+        que deje el precio en números negativos.
+        """
+        calculadora = CalculadoraDescuentos()
+        monto = 100
+        descuento_excesivo = 150
+        
+        print("\n--- PRUEBA DEL ESTUDIANTE 4 (Descuento Excesivo) ---")
+        print(f"Monto original: ${monto}")
+        print(f"Descuento fijo intentado: ${descuento_excesivo}")
+        
+        # Assert
+        with self.assertRaises(ValueError) as context:
+            calculadora.aplicar_descuento_fijo(monto, descuento_excesivo)
+            
+        print(f"Excepción capturada correctamente: {context.exception}")
+
+    def test_tipo_de_dato_incorrecto_lanza_excepcion(self):
+        """
+        Verifica que se levante un TypeError si se envían strings.
+        """
+        calculadora = CalculadoraDescuentos()
+        monto_texto = "cien dólares"
+        
+        print("\n--- PRUEBA DEL ESTUDIANTE 4 (Validación de Tipo) ---")
+        print(f"Dato ingresado: '{monto_texto}'")
+        
+        with self.assertRaises(TypeError) as context:
+            calculadora.aplicar_descuento_porcentaje(monto_texto)
+            
+        print(f"Excepción capturada correctamente: {context.exception}")
 
 # Permite ejecutar la prueba desde la terminal.
 if __name__ == "__main__":
