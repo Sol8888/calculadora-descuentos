@@ -5,38 +5,53 @@
 
 class CalculadoraDescuentos:
 
-    def _validar_positivo(self, valor, nombre_variable):
-        """Método privado para validar que las entradas sean numéricas y positivas."""
-        if not isinstance(valor, (int, float)):
-            raise TypeError(f"{nombre_variable} debe ser un valor numérico.")
-        if valor < 0:
-            raise ValueError(f"{nombre_variable} no puede ser negativo.")
-
-    # Ciclo 1 - Refactorizado
-    def aplicar_descuento_porcentaje(self, monto, porcentaje=10):
-        self._validar_positivo(monto, "El monto")
-        self._validar_positivo(porcentaje, "El porcentaje")
-        
+    def aplicar_descuento_porcentaje(self, monto, porcentaje):
+        """
+        Ciclo 1: Aplica un descuento porcentual dinámico.
+        Firma equivalente: aplicarDescuentoPorcentaje(double monto, double porcentaje)
+        """
+        if monto < 0 or porcentaje < 0:
+            raise ValueError("El monto y el porcentaje no pueden ser negativos.")
         if porcentaje > 100:
-            raise ValueError("El porcentaje de descuento no puede ser mayor a 100.")
+            raise ValueError("El porcentaje no puede ser mayor al 100%.")
             
         descuento = monto * (porcentaje / 100)
         return monto - descuento
 
-    # Ciclo 2 - Refactorizado
     def aplicar_descuento_fijo(self, monto, descuento):
-        self._validar_positivo(monto, "El monto")
-        self._validar_positivo(descuento, "El descuento fijo")
-        
+        """
+        Ciclo 2: Aplica un descuento por cantidad fija.
+        Firma equivalente: aplicarDescuentoFijo(double monto, double descuento)
+        """
+        if monto < 0 or descuento < 0:
+            raise ValueError("El monto y el descuento fijo no pueden ser negativos.")
         if descuento > monto:
-            raise ValueError("El descuento fijo no puede ser mayor al precio original.")
+            raise ValueError("El descuento fijo no puede ser mayor al monto original.")
             
         return monto - descuento
     
-    # Ciclo 3 - Refactorizado (Aplicando DRY - Don't Repeat Yourself)
     def aplicar_descuento_acumulado(self, monto, porcentaje, descuento):
-        # Reutilizamos los métodos anteriores en lugar de reescribir la lógica matemática
+        """
+        Ciclo 3: Aplica primero el descuento porcentual y luego el fijo.
+        Reutiliza los métodos de los ciclos 1 y 2 (Principio DRY).
+        """
         subtotal = self.aplicar_descuento_porcentaje(monto, porcentaje)
         precio_final = self.aplicar_descuento_fijo(subtotal, descuento)
-        
         return precio_final
+
+    def verificar_precio_final(self, monto_original, precio_final):
+        """
+        Ciclo 4: Método explícito para verificar la validez del precio final 
+        después de aplicar las transformaciones de descuento.
+        Returns:
+            bool: True si el precio final cumple con las reglas de negocio.
+        """
+        # Regla 1: El precio final no puede ser negativo.
+        if precio_final < 0:
+            raise ValueError("Verificación Fallida: El precio final no puede ser menor a cero.")
+        
+        # Regla 2: El precio final no puede ser superior al monto original.
+        if precio_final > monto_original:
+            raise ValueError("Verificación Fallida: El precio final no puede superar al monto original.")
+            
+        return True
